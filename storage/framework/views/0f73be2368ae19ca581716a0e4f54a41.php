@@ -122,7 +122,7 @@
     <div class="section-title">Explore Features</div>
     <div class="features">
 
-        <a href="{{ route('adopt') }}" style="text-decoration: none;">
+        <a href="<?php echo e(route('adopt')); ?>" style="text-decoration: none;">
           <div class="card">
            <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Adopt">
            <h3>Adopt a Pet</h3>
@@ -130,7 +130,7 @@
           </div>
         </a>
 
-        <a href="{{ route('vet.finder') }}">
+        <a href="<?php echo e(route('vet.finder')); ?>">
          <div class="card">
            <img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" alt="Vet">
            <h3>Vet Finder & Booking</h3>
@@ -139,7 +139,7 @@
         </a>
 
 
-        <a href="{{ route('pet.care') }}" style="text-decoration: none;">
+        <a href="<?php echo e(route('pet.care')); ?>" style="text-decoration: none;">
          <div class="card">
            <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Care">
            <h3>Pet Care</h3>
@@ -166,7 +166,7 @@
             <p>Read expert articles on pet care, training, nutrition, and emergencies.</p>
         </div>
 
-       <a href="{{ route('filter.search') }}" style="text-decoration: none;">
+       <a href="<?php echo e(route('filter.search')); ?>" style="text-decoration: none;">
          <div class="card">
           <img src="https://cdn-icons-png.flaticon.com/512/1087/1087815.png" alt="Filter">
           <h3>Filter & Search</h3>
@@ -180,7 +180,7 @@
             <p>Contain all profile info and pet-related facilities.</p>
         </div>
 
-        <a href="{{ route('pet.food.guide') }}" style="text-decoration: none;">
+        <a href="<?php echo e(route('pet.food.guide')); ?>" style="text-decoration: none;">
           <div class="card">
             <img src="https://cdn-icons-png.flaticon.com/512/1345/1345874.png" alt="Food Guide">
             <h3>Pet Food Guide</h3>
@@ -206,3 +206,4 @@
 </html>
 
 
+<?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/laravel_PetPal/resources/views/auth/dashboard.blade.php ENDPATH**/ ?>

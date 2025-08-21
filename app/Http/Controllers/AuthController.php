@@ -96,6 +96,10 @@ public function showPetFoodGuide()
     return view('pet-food-guide'); // corresponds to resources/views/pet-food-guide.blade.php
 }
 
+public function showVetFinder()
+{
+    return view('auth.vet_finder');
+}
 
 
 

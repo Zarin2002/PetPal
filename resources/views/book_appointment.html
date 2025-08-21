@@ -1,0 +1,112 @@
+<!-- book_appointment.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Appointment - PetConnect</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #fff3e0, #e3f2fd);
+        }
+        .topbar {
+            background-color: #2a5bd7;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .topbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+        .form-container {
+            background: white;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h2 { color: #2a5bd7; margin-bottom: 20px; }
+        label { display: block; margin: 10px 0 5px; }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        button {
+            width: 100%;
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover { background: #e68900; }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #2a5bd7;
+            color: white;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <div><strong>🐾 PetConnect</strong></div>
+        <div>
+            <a href="{{ route('dashboard') }}">Home</a>
+            <a href="#">My Account</a>
+            <a href="#">Cart</a>
+            <a href="#">Logout</a>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <h2>Book Appointment</h2>
+        <form action="confirm_booking.php" method="POST">
+            <label>Veterinarian</label>
+            <input type="text" id="vet_name" name="vet_name" readonly>
+
+            <label>Your Name</label>
+            <input type="text" name="name" required>
+
+            <label>Phone Number</label>
+            <input type="text" name="phone" required>
+
+            <label>Preferred Date</label>
+            <input type="date" name="date" required>
+
+            <label>Preferred Time</label>
+            <input type="time" name="time" required>
+
+            <label>Additional Notes</label>
+            <textarea name="notes" rows="3"></textarea>
+
+            <button type="submit">Confirm Booking</button>
+        </form>
+    </div>
+
+    <div class="footer">
+        &copy; 2025 PetConnect. All rights reserved.
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        document.getElementById('vet_name').value = params.get('vet') || '';
+    </script>
+
+</body>
+</html>
