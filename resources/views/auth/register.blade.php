@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pet Pal Log in</title>
+    <title>Pet Pal Register</title>
     <!-- Google Fonts for elegant cursive -->
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -81,16 +81,14 @@
         }
 
         /* Style button */
-        .overlay .btn-success,
-        .overlay .btn-primary {
+        .overlay .btn-success {
             border-radius: 12px;
             background: linear-gradient(135deg, #33abbd, #66d9ef);
             border: none;
             transition: all 0.3s ease;
         }
 
-        .overlay .btn-success:hover,
-        .overlay .btn-primary:hover {
+        .overlay .btn-success:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
@@ -127,42 +125,46 @@
     <!-- Background Image -->
     <div class="background-image"></div>
 
-    <!-- Title Above Login -->
-    <div class="title">Login to Your PET PAL</div>
+    <!-- Title Above Registration -->
+    <div class="title">Create Your PET PAL Account</div>
 
-    <!-- Login Form -->
+    <!-- Registration Form -->
     <div class="overlay">
-        <?php if(session('success')): ?>
-            <div class="alert alert-success">
-                <?php echo e(session('success')); ?>
-
-            </div>
-        <?php endif; ?>
-
-        <?php if($errors->any()): ?>
+        @if ($errors->any())
             <div class="alert alert-danger">
-                <?php echo e($errors->first()); ?>
-
+                <ul class="mb-0">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-        <?php endif; ?>
+        @endif
 
-        <form method="POST" action="<?php echo e(route('login')); ?>">
-            <?php echo csrf_field(); ?>
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
+            <div class="mb-3">
+                <label>Full Name</label>
+                <input type="text" name="name" class="form-control" required value="{{ old('name') }}">
+            </div>
             <div class="mb-3">
                 <label>Email address</label>
-                <input type="email" name="email" class="form-control" required value="<?php echo e(old('email')); ?>">
+                <input type="email" name="email" class="form-control" required value="{{ old('email') }}">
             </div>
             <div class="mb-3">
                 <label>Password</label>
                 <input type="password" name="password" class="form-control" required>
             </div>
+            <div class="mb-3">
+                <label>Confirm Password</label>
+                <input type="password" name="password_confirmation" class="form-control" required>
+            </div>
             <div class="d-grid">
-                <button class="btn btn-primary" type="submit">Login</button>
+                <button class="btn btn-success" type="submit">Register</button>
             </div>
         </form>
 
         <div class="mt-3 text-center">
-            Don’t have an account? <a href="<?php echo e(route('register')); ?>">Register</a>
+            Already have an account? <a href="{{ route('login') }}">Log in</a>
         </div>
     </div>
 
@@ -188,4 +190,12 @@
 </html>
 
 
-<?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/laravel_PetPal/resources/views/auth/login.blade.php ENDPATH**/ ?>
+
+
+
+
+
+
+
+
+

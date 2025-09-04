@@ -4,6 +4,10 @@
 use Illuminate\Support\Facades\Route;
 
 
+ // This creates login, logout, register, password reset routes automatically
+
+
+
 Route::get('/', function () {
    return view('welcome');
 });
@@ -32,8 +36,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
 
 
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
+
 
 
 
@@ -89,3 +92,98 @@ Route::get('/', [DashboardController::class, 'index'])->name('home');
  // create this controller if not done
 
 
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\CartController;
+
+Route::get('/shop', [ShopController::class, 'index'])->name('shop');
+Route::get('/shop/category/{id}', [ShopController::class, 'category'])->name('shop.category');
+Route::get('/shop/{id}', [ShopController::class, 'show'])->name('shop.show');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
+
+Route::get('/pet-services', function () {
+    return view('pet-services');
+})->name('pet.services');
+
+
+Route::get('/pet-social-wall', function () {
+    return view('pet-social-wall');
+})->name('pet.social.wall');
+
+use Illuminate\Support\Facades\Auth;
+
+Route::get('/account', function () {
+    return view('account');
+})->middleware('auth')->name('account');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/my-account', [App\Http\Controllers\AccountController::class, 'index'])->name('my.account');
+    Route::post('/my-account/add-pet', [App\Http\Controllers\AccountController::class, 'addPet'])->name('my.account.add.pet');
+});
+use App\Http\Controllers\AccountController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/my-account', [AccountController::class, 'index'])->name('account.index');
+    Route::post('/my-account/add-pet', [AccountController::class, 'addPet'])->name('account.addPet');
+});
+
+
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/my-account', [AccountController::class, 'index'])->name('account.index');
+});
+
+
+Route::get('/my-account', [AccountController::class, 'index'])->name('account.index');
+Route::middleware(['auth'])->group(function() {
+    Route::get('/my-account', [App\Http\Controllers\AccountController::class, 'index'])->name('account.index');
+});
+Route::get('/my-account', [App\Http\Controllers\AccountController::class, 'index'])->name('my-account');
+
+
+// My Account page
+Route::get('/my-account', [AccountController::class, 'index'])->name('my-account');
+// Dashboard page
+use App\Http\Controllers\PetCareController;
+
+Route::get('/pet-care', [PetCareController::class, 'dashboard'])->name('pet_care');
+
+// Store routes
+Route::post('/pets', [PetCareController::class, 'storePet'])->name('pets.store');
+Route::post('/health', [PetCareController::class, 'storeHealth'])->name('health.store');
+Route::post('/feeding', [PetCareController::class, 'storeFeeding'])->name('feeding.store');
+Route::post('/reminders', [PetCareController::class, 'storeReminder'])->name('reminders.store');
+
+// See All routes
+Route::get('/see-all/{type}', [PetCareController::class, 'seeAll'])->name('pets.index'); // You can reuse index for all
+
+
+Route::get('/pet-care', [PetCareController::class, 'dashboard'])->name('pet_care');
+
+Route::post('/pets', [PetCareController::class, 'storePet'])->name('pets.store');
+Route::post('/health', [PetCareController::class, 'storeHealth'])->name('health.store');
+Route::post('/feeding', [PetCareController::class, 'storeFeeding'])->name('feeding.store');
+Route::post('/reminders', [PetCareController::class, 'storeReminder'])->name('reminders.store');
+
+Route::get('/see-all/{type}', [PetCareController::class, 'seeAll'])->name('pets.index');
+Route::delete('/remove/{type}/{index}', [PetCareController::class, 'remove'])->name('pets.remove');
+Route::post('/store/{type}', [PetCareController::class, 'store'])->name('pets.store');
+
+
+Route::get('/pet-care', [PetCareController::class, 'index'])->name('pet.care');
+
+// Store routes
+Route::post('/store/{type}', [PetCareController::class, 'store'])->name('pets.store');
+
+// See all stored items
+Route::get('/see-all/{type}', [PetCareController::class, 'seeAll'])->name('pets.index');
+
+// Remove an item
+Route::delete('/remove/{type}/{index}', [PetCareController::class, 'remove'])->name('pets.remove');
